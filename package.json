@@ -1,0 +1,28 @@
+{
+  "name": "new_game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.1",
+    "grunt": "^1.0.1",
+    "grunt-typescript": "",
+    "phaser": "^2.6.2",
+    "typescript": "^2.2.0-dev.20170107",
+    "webfontloader": "^1.6.27"
+  },
+  "devDependencies": {
+    "grunt-contrib": "^0.11.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-express": "^1.4.1",
+    "grunt-newer": "^1.2.0"
+  }
+}
