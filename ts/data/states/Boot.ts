@@ -12,49 +12,33 @@ module TProject {
             //}
             this.game.load.image("background", "assets/" + "space.jpg");
 
-            this.game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
+            this.game.load.script('webfont', 'dist/lib/webfont.js');
 
-            var texture_json = {"frames": {
-
-                "border": {
-                    "frame": {"x":1,"y":138,"w":91,"h":293},
-                    "rotated": false,
-                    "trimmed": true,
-                    "spriteSourceSize": {"x":7,"y":124,"w":91,"h":293},
-                    "sourceSize": {"w":526,"h":600},
-                    "pivot": {"x":0.5,"y":0.5}
-                },
-                "field": {
-                    "frame": {"x":94,"y":138,"w":88,"h":290},
-                    "rotated": false,
-                    "trimmed": true,
-                    "spriteSourceSize": {"x":180,"y":126,"w":88,"h":290},
-                    "sourceSize": {"w":277,"h":600},
-                    "pivot": {"x":0.5,"y":0.5}
-                },
+            var texture_json = {"frames":
+            { "border": {
+                "frame": {"x":1,"y":204,"w":91,"h":293},
+                "rotated": false,
+                "trimmed": true,
+                "spriteSourceSize": {"x":7,"y":4,"w":91,"h":293},
+                "sourceSize": {"w":101,"h":302}
+            },
                 "pineapple": {
-                    "filename": "pineapple.png",
-                    "frame": {"x":1,"y":1,"w":201,"h":135},
+                    "frame": {"x":1,"y":1,"w":135,"h":201},
                     "rotated": false,
                     "trimmed": false,
                     "spriteSourceSize": {"x":0,"y":0,"w":135,"h":201},
-                    "sourceSize": {"w":135,"h":201},
-                    "pivot": {"x":0.5,"y":0.5}
-                }}}
-
-            var texture_json_2 = {"frames": {
+                    "sourceSize": {"w":135,"h":201}
+                },
                 "rect": {
-                    "frame": {"x":1,"y":1,"w":88,"h":290},
+                    "frame": {"x":94,"y":204,"w":88,"h":290},
                     "rotated": false,
                     "trimmed": true,
-                    "spriteSourceSize": {"x":180,"y":126,"w":88,"h":290},
-                    "sourceSize": {"w":277,"h":600},
-                    "pivot": {"x":0.5,"y":0.5}
-                }}
-            };
+                    "spriteSourceSize": {"x":1,"y":1,"w":88,"h":290},
+                    "sourceSize": {"w":90,"h":292}
+                }
+            }}
 
-            this.game.load.atlasJSONHash('Atlas',"assets/texture.png",null,texture_json);
-            this.game.load.atlasJSONHash('Atlas2',"assets/texture_2.png",null,texture_json_2);
+            this.game.load.atlasJSONHash('Atlas', "assets/atlas.png", null, texture_json);
 
 
 
@@ -63,6 +47,12 @@ module TProject {
         create () {
             
             Core.begin(this.game);
+
+            WebFont.load({
+                google: {
+                    families: ['Acme']
+                }
+            });
 
         }
 

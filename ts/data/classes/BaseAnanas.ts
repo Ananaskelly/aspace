@@ -5,14 +5,22 @@ module TProject {
     export class BaseAnanas extends Phaser.Sprite {
 
         private _ananasScore: AnanasScore;
-        private _scorePlank: ScorePlank;
+        private _manager: MiddleManager;
 
-        constructor(game: Phaser.Game, x: number, y: number, scorePlank: ScorePlank){
+        private _arcade: Phaser.Physics.Arcade;
+        private _arcadeSpriteWarp: Phaser.Physics.Arcade.Body;
+
+        private _timer: Phaser.Timer;
+
+        constructor(game: Phaser.Game, x: number, y: number, manager: MiddleManager, arcade: Phaser.Physics.Arcade){
             super(game, x, y, '');
             this.anchor.set(0.5, 0.5);
-            this.angle = - 90;
-            this._scorePlank = scorePlank;
+            this._manager = manager;
+            this._arcade = arcade;
             this.loadTexture("Atlas", "pineapple");
+            this._arcadeSpriteWarp = new Phaser.Physics.Arcade.Body(this);
+            this.body = this._arcadeSpriteWarp;
+            this.body.velocity = new Phaser.Point(0, 0);
         }
 
         public activateAnanas(){
@@ -21,15 +29,30 @@ module TProject {
             this.events.onInputOver.add(this.onInputOver, this);
         }
 
-        private onInputDown(){
-            this.game.add.tween(this).to( { angle: -85 }, 10, Phaser.Easing.Linear.None, true, 0, 1, true);
+        public onClickHandle(){
+            this.game.add.tween(this).to( { angle: 5 }, 10, Phaser.Easing.Linear.None, true, 0, 1, true);
             this._ananasScore = new AnanasScore(this.game, this.world.x, this.world.y);
+        }
 
-            this._scorePlank.scoreUp();
+        public pullAnanas(){
+            this.game.add.tween(this.scale).to({x: 0.7, y: 0.7}, 400, Phaser.Easing.Back.Out, true, 0, 0, false);
+
+            this.body.velocity = new Phaser.Point(0, -800);
+            this._arcadeSpriteWarp.acceleration.y = -1000;
+            this._arcade.accelerateToXY(this, this.x, 0);
+        }
+
+        private onInputDown(){
+            this._manager.handleClick();
         }
 
         private onInputOver() {
             this.game.add.tween(this.scale).to({x: 1.2, y: 1.2}, 400, Phaser.Easing.Back.Out, true, 0, 0, true);
+        }
+
+        private destroyAnanas(){
+            this._arcadeSpriteWarp.destroy();
+            this.destroy();
         }
     }
 }
